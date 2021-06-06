@@ -40,7 +40,7 @@ class MainActivity : BaseActivity() {
         )
         val navController = findNavController(R.id.fragment)
         setupActionBarWithNavController(navController, AppBarConfiguration(navController.graph))
-        // 테스트
+        // 테스트 일이삼
         homeViewModel.insertTestViewModel(testModel)
     }
 
