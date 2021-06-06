@@ -5,6 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.ipotoday.ipotoday.R
 import com.ipotoday.ipotoday.data.model.TestModel
 import com.ipotoday.ipotoday.ui.base.BaseActivity
@@ -25,6 +28,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         homeViewModel.test.observe(this) {
             Timber.d("DEBUG : $it")
         }
@@ -34,7 +38,8 @@ class MainActivity : BaseActivity() {
             title = "IPO Today",
             testDescription = "Sdkjfdkljfdklsfjdksl"
         )
-
+        val navController = findNavController(R.id.fragment)
+        setupActionBarWithNavController(navController, AppBarConfiguration(navController.graph))
         homeViewModel.insertTestViewModel(testModel)
     }
 
