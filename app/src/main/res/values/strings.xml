@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">IPOToday</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Common -->
+    <string name="text_kospi">코스피</string>
+    <string name="text_kosdaq">코스닥</string>
+    <string name="text_konex">코넥스</string>
+    <string name="text_spac">스팩</string>
+
+    <!-- Detail -->
+
+    <!-- Home -->
+
+    <!-- Calendar -->
+
+    <!-- Bookmark -->
+
+    <!-- .... -->
+
 </resources>

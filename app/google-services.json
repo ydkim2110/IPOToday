@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "692981022670",
+    "project_id": "ipo-today-64f7a",
+    "storage_bucket": "ipo-today-64f7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692981022670:android:12cfa07269ac3773c2759f",
+        "android_client_info": {
+          "package_name": "com.ipotoday.ipotoday"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "692981022670-i3evh88gf5stb7dq9gqj9i5j9f9380oi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ipotoday.ipotoday",
+            "certificate_hash": "0bf7b4c406d24ddb6897fad423513adfb0381eb9"
+          }
+        },
+        {
+          "client_id": "692981022670-jgn4vlu2nkhjjm09tvse47lll1hq0kks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMCszr6Ez9tcZguiYVFlSA-OLDCX_xPZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692981022670-jgn4vlu2nkhjjm09tvse47lll1hq0kks.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
