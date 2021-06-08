@@ -6,27 +6,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
 import com.ipotoday.ipotoday.R
+import com.ipotoday.ipotoday.data.model.TestModel
+import com.ipotoday.ipotoday.databinding.FragmentHomeBinding
+import com.ipotoday.ipotoday.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
-class HomeFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+@AndroidEntryPoint
+class HomeFragment : BaseFragment() {
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        return FragmentHomeBinding.inflate(inflater, container, false).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    }
-
-    companion object {
-        fun newInstance() = HomeFragment().apply {
+        homeViewModel.test.observe(this) {
+            Timber.d("DEBUG : $it")
         }
+
+        val testModel = TestModel(
+            id = null,
+            title = "IPO Today",
+            testDescription = "Sdkjfdkljfdklsfjdksl"
+        )
+        // 테스트 일이삼
+        homeViewModel.insertTestViewModel(testModel)
     }
 }

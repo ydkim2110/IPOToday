@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">IPOToday</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_home_fragment">Hello home fragment</string>
+    <string name="hello_bookmark_fragment">Hello bookmark fragment</string>
+    <string name="hello_calendar_fragment">Hello calendar fragment</string>
+    <string name="hello_settings_fragment">Hello settings fragment</string>
 
     <!-- Common -->
     <string name="text_kospi">코스피</string>
@@ -18,5 +21,11 @@
     <!-- Bookmark -->
 
     <!-- .... -->
+
+    <!-- NavMenu -->
+    <string name="text_home">Home</string>
+    <string name="text_bookmark">Bookmark</string>
+    <string name="text_calendar">Calendar</string>
+    <string name="text_settings">Settings</string>
 
 </resources>
