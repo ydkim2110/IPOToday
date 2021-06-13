@@ -23,7 +23,16 @@ class HomeFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return FragmentHomeBinding.inflate(inflater, container, false).root
+        return FragmentHomeBinding.inflate(inflater, container, false).run {
+            recyclerView.apply {
+                adapter = HomeListAdapter().apply {
+                    homeViewModel.tempList.observe(viewLifecycleOwner) { list ->
+                        submitList(list)
+                    }
+                }
+            }
+            root
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
