@@ -9,7 +9,7 @@ import java.util.*
 @Entity(
     tableName = "ipo_model"
 )
-data class IPOModel(    var id: Int? = null,
+data class IPOModel(var id: Int? = null,
     @ColumnInfo(name = "company_name") var companyName: String? = "",
     @ColumnInfo(name = "company_code") var companyCode: String? = "",
     @ColumnInfo(name = "company_description") var companyDescription: String? = "",

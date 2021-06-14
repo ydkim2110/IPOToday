@@ -24,7 +24,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         _test.postValue("Test Start!!!!!")
-        tempList.postValue(mutableListOf(HotIPOModel(0, listOf(IPOModel(), IPOModel())), IPOModel(), IPOModel()))
+        tempList.postValue(mutableListOf("Hot 종목", HotIPOModel(0, listOf(IPOModel(), IPOModel())), "전체리스트", IPOModel(), IPOModel()))
     }
 
     fun insertTestViewModel(testModel: TestModel) =
