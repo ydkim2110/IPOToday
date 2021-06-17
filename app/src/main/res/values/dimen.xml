@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="padding_header">10dp</dimen>
+    <dimen name="header_padding">10dp</dimen>
+    <dimen name="dot_size">3dp</dimen>
+    <dimen name="dot_padding">8dp</dimen>
 </resources>

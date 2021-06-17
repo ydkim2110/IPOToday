@@ -1,10 +1,13 @@
 package com.ipotoday.ipotoday.ui.home
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.tabs.TabLayoutMediator
 import com.ipotoday.ipotoday.data.model.HotIPOModel
 import com.ipotoday.ipotoday.data.model.IPOModel
 import com.ipotoday.ipotoday.databinding.ListItemIpoHeaderBinding
@@ -12,6 +15,8 @@ import com.ipotoday.ipotoday.databinding.ListItemIpoHotBinding
 import com.ipotoday.ipotoday.databinding.ListItemIpoNormalBinding
 
 class HomeListAdapter : ListAdapter<Any, RecyclerView.ViewHolder>(IPOListDiffCallback()) {
+    private lateinit var onItemClickListener: (View, Int) -> Unit
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             TYPE_HEADER_IPO -> IPOHeaderViewHolder(
@@ -56,6 +61,10 @@ class HomeListAdapter : ListAdapter<Any, RecyclerView.ViewHolder>(IPOListDiffCal
         }
     }
 
+    fun setOnItemClickListener(listener: (View, Int) -> Unit) {
+        onItemClickListener = listener
+    }
+
     inner class IPOHeaderViewHolder(private val binding: ListItemIpoHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: String) {
             binding.title = item
@@ -63,14 +72,24 @@ class HomeListAdapter : ListAdapter<Any, RecyclerView.ViewHolder>(IPOListDiffCal
     }
 
     inner class IPOHotViewHolder(private val binding: ListItemIpoHotBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: HotIPOModel) {
-            binding.viewPager.adapter = HotIPOPagerAdapter(item.list)
+        fun bind(item: HotIPOModel) = with(binding) {
+            viewPager.adapter = HotIPOPagerAdapter(item.list)
+
+            TabLayoutMediator(tabLayout, viewPager) { t, _ ->
+                viewPager.currentItem = t.position
+            }.also(TabLayoutMediator::attach)
         }
     }
 
     inner class IPOListViewHolder(private val binding: ListItemIpoNormalBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: IPOModel) {
-            // TODO https://yuar.tistory.com/85
+        init {
+            binding.setOnClickListener { onItemClickListener.invoke(it, adapterPosition) }
+        }
+
+        fun bind(item: IPOModel) = with(binding) {
+            ipoModel = item
+
+            executePendingBindings()
         }
     }
 

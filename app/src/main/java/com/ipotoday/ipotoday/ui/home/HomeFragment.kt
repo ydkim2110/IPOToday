@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import com.ipotoday.ipotoday.R
 import com.ipotoday.ipotoday.data.model.TestModel
 import com.ipotoday.ipotoday.databinding.FragmentHomeBinding
+import com.ipotoday.ipotoday.ui.MainFragmentDirections
 import com.ipotoday.ipotoday.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -28,6 +31,13 @@ class HomeFragment : BaseFragment() {
                 adapter = HomeListAdapter().apply {
                     homeViewModel.tempList.observe(viewLifecycleOwner) { list ->
                         submitList(list)
+                    }
+                    setOnItemClickListener { _, i ->
+                        homeViewModel.getData(i)?.let { data ->
+                            val direction = MainFragmentDirections.actionMainFragmentToDetailFragment(data.id!!)
+
+                            requireActivity().findNavController(R.id.fragment).navigate(direction)
+                        }
                     }
                 }
             }

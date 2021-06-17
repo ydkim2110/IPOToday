@@ -20,11 +20,27 @@ class HomeViewModel @Inject constructor(
 
     val test = _test
 
-    val tempList = MutableLiveData<MutableList<*>>()
+    val tempList = MutableLiveData<MutableList<*>>().apply {
+        postValue(mutableListOf(
+            "Hot 종목",
+            HotIPOModel(0, listOf(IPOModel(), IPOModel())),
+            "전체리스트",
+            IPOModel(
+                id = 0,
+                companyName = "카카오뱅크",
+                companyDescription = "은행업",
+                image = "file:///android_asset/kakaobank.jpg"
+            ),
+            IPOModel(
+                id = 1
+            )
+        ))
+    }
+
+    fun getData(index: Int) = tempList.value?.get(index) as? IPOModel
 
     init {
         _test.postValue("Test Start!!!!!")
-        tempList.postValue(mutableListOf("Hot 종목", HotIPOModel(0, listOf(IPOModel(), IPOModel())), "전체리스트", IPOModel(), IPOModel()))
     }
 
     fun insertTestViewModel(testModel: TestModel) =
