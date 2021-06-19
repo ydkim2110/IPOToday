@@ -16,10 +16,10 @@
 
     <!-- Home -->
     <string name="text_header_title">제목</string>
-    <string name="text_ipo_price">공모가 : </string>
-    <string name="text_ipo_amount">공모금액 : </string>
-    <string name="text_apply_date">청약일 : </string>
-    <string name="text_refund_date">환불일 : </string>
+    <string name="text_ipo_price">공모가 :</string>
+    <string name="text_ipo_amount">공모금액 :</string>
+    <string name="text_apply_date">청약일 :</string>
+    <string name="text_refund_date">환불일 :</string>
 
     <!-- Calendar -->
 

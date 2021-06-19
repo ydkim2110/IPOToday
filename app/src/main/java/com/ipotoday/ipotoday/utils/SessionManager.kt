@@ -6,6 +6,8 @@ import androidx.core.content.edit
 
 class SessionManager(context: Context) {
 
+
+
     private val prefs: SharedPreferences = PreferenceHelper.defaultPrefs(context)
 
     fun getPrefs(): SharedPreferences = prefs
