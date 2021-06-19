@@ -1,13 +1,28 @@
 package com.ipotoday.ipotoday.ui.detail
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.ipotoday.ipotoday.R
 import com.ipotoday.ipotoday.databinding.FragmentDetailBinding
+import com.ipotoday.ipotoday.databinding.FragmentDetailBindingImpl
 import com.ipotoday.ipotoday.ui.base.BaseFragment
 
 class DetailFragment : BaseFragment() {
+
+//    override fun getFragmentBinding(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?
+//    ): FragmentDetailBinding {
+//        return FragmentDetailBinding.inflate(inflater, container, false)
+//    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,4 +38,5 @@ class DetailFragment : BaseFragment() {
     companion object {
 
     }
+
 }
