@@ -5,6 +5,7 @@
     <string name="hello_bookmark_fragment">Hello bookmark fragment</string>
     <string name="hello_calendar_fragment">Hello calendar fragment</string>
     <string name="hello_settings_fragment">Hello settings fragment</string>
+    <string name="hello_alarm_fragment">Hello alarm fragment</string>
 
     <!-- Common -->
     <string name="text_kospi">코스피</string>
@@ -32,7 +33,7 @@
     <string name="text_bookmark">Bookmark</string>
     <string name="text_calendar">Calendar</string>
     <string name="text_settings">Settings</string>
+    <string name="text_alarm">Alarm</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

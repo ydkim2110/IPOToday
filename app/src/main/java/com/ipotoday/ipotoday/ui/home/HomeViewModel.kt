@@ -23,7 +23,28 @@ class HomeViewModel @Inject constructor(
     val tempList = MutableLiveData<MutableList<*>>().apply {
         postValue(mutableListOf(
             "Hot 종목",
-            HotIPOModel(0, listOf(IPOModel(), IPOModel(), IPOModel())),
+            HotIPOModel(0, listOf(IPOModel(
+                id = 0,
+                companyName = "카카오뱅크",
+                companyDescription = "은행업",
+                image = "file:///android_asset/kakaobank.jpg",
+                ipoPrice = "6500",
+                ipoAmount = "780억원"
+            ), IPOModel(
+                id = 1,
+                companyName = "카카오뱅크",
+                companyDescription = "은행업",
+                image = "file:///android_asset/kakaobank.jpg",
+                ipoPrice = "6500",
+                ipoAmount = "780억원"
+            ), IPOModel(
+                id = 2,
+                companyName = "카카오뱅크",
+                companyDescription = "은행업",
+                image = "file:///android_asset/kakaobank.jpg",
+                ipoPrice = "6500",
+                ipoAmount = "780억원"
+            ))),
             "전체리스트",
             IPOModel(
                 id = 0,

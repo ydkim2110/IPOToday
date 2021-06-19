@@ -17,9 +17,11 @@ class HotIPOPagerAdapter(private val list: List<IPOModel>) : RecyclerView.Adapte
 
     override fun getItemCount(): Int = list.size
 
-    inner class PageViewHolder(binding: PagerItemIpoBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class PageViewHolder(private val binding: PagerItemIpoBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: IPOModel) {
+            binding.ipoModel = item
 
+            binding.executePendingBindings()
         }
     }
 }
