@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ipotoday.ipotoday.data.model.HotIPOModel
 import com.ipotoday.ipotoday.data.model.IPOModel
+import com.ipotoday.ipotoday.data.model.IPOTotalModel
 import com.ipotoday.ipotoday.databinding.ListItemIpoHeaderBinding
 import com.ipotoday.ipotoday.databinding.ListItemIpoHotBinding
 import com.ipotoday.ipotoday.databinding.ListItemIpoNormalBinding
+import com.ipotoday.ipotoday.databinding.ListItemIpoTotalBinding
 
 class HomeListAdapter : ListAdapter<Any, RecyclerView.ViewHolder>(IPOListDiffCallback()) {
     private lateinit var onItemClickListener: (View, Int) -> Unit
@@ -33,6 +35,13 @@ class HomeListAdapter : ListAdapter<Any, RecyclerView.ViewHolder>(IPOListDiffCal
                     false
                 )
             )
+            TYPE_TOTAL_IPO -> IPOTotalViewHolder(
+                ListItemIpoTotalBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
             TYPE_NORMAL_IPO -> IPOListViewHolder(
                 ListItemIpoNormalBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -48,6 +57,7 @@ class HomeListAdapter : ListAdapter<Any, RecyclerView.ViewHolder>(IPOListDiffCal
         when (holder) {
             is IPOHeaderViewHolder -> holder.bind(getItem(position) as String)
             is IPOHotViewHolder -> holder.bind(getItem(position) as HotIPOModel)
+            is IPOTotalViewHolder -> holder.bind(getItem(position) as IPOTotalModel)
             is IPOListViewHolder -> holder.bind(getItem(position) as IPOModel)
         }
     }
@@ -56,6 +66,7 @@ class HomeListAdapter : ListAdapter<Any, RecyclerView.ViewHolder>(IPOListDiffCal
         return when (getItem(position)) {
             is String -> TYPE_HEADER_IPO
             is HotIPOModel -> TYPE_HOT_IPO
+            is IPOTotalModel -> TYPE_TOTAL_IPO
             is IPOModel -> TYPE_NORMAL_IPO
             else -> throw NoSuchElementException()
         }
@@ -81,6 +92,14 @@ class HomeListAdapter : ListAdapter<Any, RecyclerView.ViewHolder>(IPOListDiffCal
         }
     }
 
+    inner class IPOTotalViewHolder(private val binding: ListItemIpoTotalBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: IPOTotalModel) {
+            binding.ipoTotalModel = item
+
+            binding.executePendingBindings()
+        }
+    }
+
     inner class IPOListViewHolder(private val binding: ListItemIpoNormalBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setOnClickListener { onItemClickListener.invoke(it, adapterPosition) }
@@ -96,7 +115,8 @@ class HomeListAdapter : ListAdapter<Any, RecyclerView.ViewHolder>(IPOListDiffCal
     companion object {
         private const val TYPE_HEADER_IPO = 0
         private const val TYPE_HOT_IPO = 1
-        private const val TYPE_NORMAL_IPO = 2
+        private const val TYPE_TOTAL_IPO = 2
+        private const val TYPE_NORMAL_IPO = 3
     }
 }
 

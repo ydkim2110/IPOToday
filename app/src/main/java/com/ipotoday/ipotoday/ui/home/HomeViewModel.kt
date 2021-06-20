@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.ipotoday.ipotoday.data.local.repository.TestRepository
 import com.ipotoday.ipotoday.data.model.HotIPOModel
 import com.ipotoday.ipotoday.data.model.IPOModel
+import com.ipotoday.ipotoday.data.model.IPOTotalModel
 import com.ipotoday.ipotoday.data.model.TestModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -46,6 +47,7 @@ class HomeViewModel @Inject constructor(
                 ipoAmount = "780억원"
             ))),
             "전체리스트",
+            IPOTotalModel(3),
             IPOModel(
                 id = 0,
                 companyName = "카카오뱅크",

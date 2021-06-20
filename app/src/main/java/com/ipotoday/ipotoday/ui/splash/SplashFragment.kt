@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ipotoday.ipotoday.databinding.FragmentSplashBinding
 import com.ipotoday.ipotoday.ui.base.BaseFragment
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashFragment : BaseFragment() {
+    private val splashViewModel by viewModels<SplashViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,13 +26,10 @@ class SplashFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         val direction = SplashFragmentDirections.actionSplashFragmentToMainFragment()
 
-        lifecycleScope.launch {
-            delay(SPLASH_TIME)
-            findNavController().navigate(direction)
+        splashViewModel.launchLiveData.observe(viewLifecycleOwner) { isLaunch ->
+            if (isLaunch) {
+                findNavController().navigate(direction)
+            }
         }
-    }
-
-    companion object {
-        private const val SPLASH_TIME = 2000L
     }
 }

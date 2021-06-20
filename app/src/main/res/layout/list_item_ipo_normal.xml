@@ -4,6 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="com.ipotoday.ipotoday.utils.DateUtils" />
         <variable
                 name="ipoModel"
                 type="com.ipotoday.ipotoday.data.model.IPOModel" />
@@ -152,17 +153,17 @@
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@{ipoModel.applyStartDate.toString()}" />
+                                android:text="@{DateUtils.INSTANCE.parseTime(ipoModel.applyStartDate)}" />
 
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="~" />
+                                android:text=" ~ " />
 
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@{ipoModel.applyEndDate.toString()}" />
+                                android:text="@{DateUtils.INSTANCE.parseTime(ipoModel.applyEndDate)}" />
 
                     </LinearLayout>
 
@@ -182,7 +183,7 @@
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@{ipoModel.refundDate.toString()}" />
+                                android:text="@{DateUtils.INSTANCE.parseTime(ipoModel.refundDate)}" />
 
                     </LinearLayout>
 
