@@ -50,7 +50,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //(parentFragment?.parentFragment as? MainFragment)?.setUpMenuItem()
+        setHasOptionsMenu(true)
         homeViewModel.test.observe(this) {
             Timber.d("DEBUG : $it")
         }
@@ -64,20 +64,19 @@ class HomeFragment : BaseFragment() {
         homeViewModel.insertTestViewModel(testModel)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+    }
 
-    /*private fun setUpMenuItem() {
-        Log.e("TEST", "${(parentFragment?.parentFragment as? MainFragment)?.binding?.toolbar?.title}")
-        (parentFragment?.parentFragment as? MainFragment)?.binding
-            ?.toolbar
-            ?.setOnMenuItemClickListener { item ->
-                when (item.itemId) {
-                    R.id.action_alarm -> {
-                        findNavController().navigate(MainFragmentDirections.actionMainFragmentToAlarmFragment())
-                        true
-                    }
-                    else -> false
-                }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_alarm -> {
+                val direction = MainFragmentDirections.actionMainFragmentToAlarmFragment()
+
+                requireActivity().findNavController(R.id.fragment).navigate(direction)
+                true
             }
-        setHasOptionsMenu(true)
-    }*/
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }

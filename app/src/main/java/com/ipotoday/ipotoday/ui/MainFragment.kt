@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -24,7 +25,9 @@ class MainFragment : BaseFragment() {
     @Inject
     lateinit var sessionManager: SessionManager
 
-    private var binding: FragmentMainBinding by autoCleared()
+    var binding: FragmentMainBinding by autoCleared()
+
+    var navController: NavController by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,27 +35,12 @@ class MainFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false).apply {
-            val navController = (childFragmentManager.findFragmentById(R.id.nav_host_container) as NavHostFragment).navController
+            navController = (childFragmentManager.findFragmentById(R.id.nav_host_container) as NavHostFragment).navController
 
             (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
             bottomNav.setupWithNavController(navController)
             bottomNav.setOnNavigationItemReselectedListener(fun(_: MenuItem) = Unit)
         }
         return binding.root
-    }
-
-    fun setUpMenuItem() {
-        binding.toolbar.title = "테스트111"
-        binding.toolbar.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.alarmFragment -> {
-                    findNavController().navigate(MainFragmentDirections.actionMainFragmentToAlarmFragment())
-                    true
-                }
-                else -> false
-            }
-        }
-        binding.toolbar.inflateMenu(R.menu.menu_main)
-        setHasOptionsMenu(true)
     }
 }
