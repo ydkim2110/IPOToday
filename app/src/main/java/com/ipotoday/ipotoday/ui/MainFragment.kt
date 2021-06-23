@@ -27,15 +27,13 @@ class MainFragment : BaseFragment() {
 
     var binding: FragmentMainBinding by autoCleared()
 
-    var navController: NavController by autoCleared()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false).apply {
-            navController = (childFragmentManager.findFragmentById(R.id.nav_host_container) as NavHostFragment).navController
+            val navController = (childFragmentManager.findFragmentById(R.id.nav_host_container) as NavHostFragment).navController
 
             (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
             bottomNav.setupWithNavController(navController)
