@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.ipotoday.ipotoday.R
 import com.ipotoday.ipotoday.data.model.IPOModel
@@ -11,6 +12,9 @@ import com.ipotoday.ipotoday.databinding.FragmentHomeBinding
 import com.ipotoday.ipotoday.ui.MainFragmentDirections
 import com.ipotoday.ipotoday.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -42,16 +46,7 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        homeViewModel.selectAllIPOModelCount { count ->
-            Timber.d("count : $count")
-        }
-        homeViewModel.ipoList.observe(viewLifecycleOwner) { ipoList ->
-            Timber.d("ipoList : $ipoList")
-        }
-        homeViewModel.test.observe(this) {
-            Timber.d("DEBUG : $it")
-        }
-
+        subscribeUi()
         val testModel = IPOModel(
             id = null,
             companyName = "IPO Today",
@@ -74,6 +69,18 @@ class HomeFragment : BaseFragment() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun subscribeUi() = with(homeViewModel) {
+        selectAllIPOModelCount { count ->
+            addTotal(count)
+        }
+        ipoList.observe(viewLifecycleOwner) { ipoList ->
+            Timber.d("ipoList : $ipoList")
+        }
+        test.observe(viewLifecycleOwner) {
+            Timber.d("DEBUG : $it")
         }
     }
 }
