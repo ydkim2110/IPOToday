@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val testRepository: HomeRepository
+    private val homeRepository: HomeRepository
 ) : ViewModel() {
     private var _test = MutableLiveData<String>()
 
@@ -82,7 +82,7 @@ class HomeViewModel @Inject constructor(
 
     fun insertTestViewModel(testModel: IPOModel) =
         viewModelScope.launch(Dispatchers.IO) {
-            testRepository.insertTestModel(testModel)
+            homeRepository.insertIPOModel(testModel)
         }
 
 }
