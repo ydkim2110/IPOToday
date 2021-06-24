@@ -1,6 +1,7 @@
 package com.ipotoday.ipotoday.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -41,6 +42,12 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+        homeViewModel.selectAllIPOModelCount { count ->
+            Log.e("TEST", "count : $count")
+        }
+        homeViewModel.ipoList.observe(viewLifecycleOwner) { ipoList ->
+            Log.e("TEST","ipoList: $ipoList")
+        }
         homeViewModel.test.observe(this) {
             Timber.d("DEBUG : $it")
         }

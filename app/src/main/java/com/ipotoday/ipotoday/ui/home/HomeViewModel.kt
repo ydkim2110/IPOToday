@@ -20,6 +20,8 @@ class HomeViewModel @Inject constructor(
 
     val test = _test
 
+    val ipoList = homeRepository.selectAllIPOModels()
+
     val homeItemList = mutableListOf(
         "Hot 종목",
         HotIPOModel(0, listOf(IPOModel(
