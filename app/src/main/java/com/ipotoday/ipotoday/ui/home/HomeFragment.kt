@@ -43,10 +43,10 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         homeViewModel.selectAllIPOModelCount { count ->
-            Log.e("TEST", "count : $count")
+            Timber.d("count : $count")
         }
         homeViewModel.ipoList.observe(viewLifecycleOwner) { ipoList ->
-            Log.e("TEST","ipoList: $ipoList")
+            Timber.d("ipoList : $ipoList")
         }
         homeViewModel.test.observe(this) {
             Timber.d("DEBUG : $it")
