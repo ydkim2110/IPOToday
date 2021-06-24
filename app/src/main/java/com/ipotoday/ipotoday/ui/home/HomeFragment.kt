@@ -57,8 +57,8 @@ class HomeFragment : BaseFragment() {
 
         val testModel = TestModel(
             id = null,
-            title = "IPO Today",
-            testDescription = "Sdkjfdkljfdklsfjdksl"
+            companyName = "IPO Today",
+            companyCode = "Sdkjfdkljfdklsfjdksl"
         )
         // 테스트 일이삼
         homeViewModel.insertTestViewModel(testModel)

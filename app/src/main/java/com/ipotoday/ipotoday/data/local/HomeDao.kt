@@ -2,6 +2,7 @@ package com.ipotoday.ipotoday.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.ipotoday.ipotoday.data.model.IPOModel
 import com.ipotoday.ipotoday.data.model.TestModel
 
 @Dao
@@ -21,5 +22,4 @@ interface HomeDao {
 
     @Query("DELETE FROM test_model")
     fun deleteAll()
-
 }
