@@ -9,9 +9,9 @@ import com.ipotoday.ipotoday.data.model.TestModel
     version = 1,
     exportSchema = false
 )
-abstract class TestDatabase : RoomDatabase() {
+abstract class HomeDatabase : RoomDatabase() {
 
-    abstract val testDao: TestDao
+    abstract val homeDao: HomeDao
 
 
 

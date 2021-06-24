@@ -3,7 +3,7 @@ package com.ipotoday.ipotoday.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ipotoday.ipotoday.data.local.repository.TestRepository
+import com.ipotoday.ipotoday.data.local.repository.HomeRepository
 import com.ipotoday.ipotoday.data.model.HotIPOModel
 import com.ipotoday.ipotoday.data.model.IPOModel
 import com.ipotoday.ipotoday.data.model.IPOTotalModel
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val testRepository: TestRepository
+    private val testRepository: HomeRepository
 ) : ViewModel() {
     private var _test = MutableLiveData<String>()
 

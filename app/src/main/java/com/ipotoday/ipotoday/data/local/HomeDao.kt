@@ -5,7 +5,7 @@ import androidx.room.*
 import com.ipotoday.ipotoday.data.model.TestModel
 
 @Dao
-interface TestDao {
+interface HomeDao {
 
     @Insert
     suspend fun insertTestModel(testModel: TestModel)

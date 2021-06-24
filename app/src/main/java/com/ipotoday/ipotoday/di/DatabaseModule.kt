@@ -2,9 +2,9 @@ package com.ipotoday.ipotoday.di
 
 import android.content.Context
 import androidx.room.Room
-import com.ipotoday.ipotoday.data.local.TestDao
-import com.ipotoday.ipotoday.data.local.TestDatabase
-import com.ipotoday.ipotoday.data.local.repository.TestRepository
+import com.ipotoday.ipotoday.data.local.HomeDao
+import com.ipotoday.ipotoday.data.local.HomeDatabase
+import com.ipotoday.ipotoday.data.local.repository.HomeRepository
 import com.ipotoday.ipotoday.utils.SessionManager
 import com.ipotoday.ipotoday.utils.TEST_DATABASE_NAME
 import dagger.Module
@@ -26,17 +26,17 @@ class DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideTestRepository(testDao: TestDao) = TestRepository(testDao)
+    fun provideHomeRepository(homeDao: HomeDao) = HomeRepository(homeDao)
 
     @Singleton
     @Provides
-    fun provideTestDatabase(
+    fun provideHomeDatabase(
         @ApplicationContext context: Context
-    ) = Room.databaseBuilder(context, TestDatabase::class.java, TEST_DATABASE_NAME)
+    ) = Room.databaseBuilder(context, HomeDatabase::class.java, TEST_DATABASE_NAME)
         .build()
 
     @Singleton
     @Provides
-    fun provideTestDao(testDatabase: TestDatabase) = testDatabase.testDao
+    fun provideHomeDao(homeDatabase: HomeDatabase) = homeDatabase.homeDao
 
 }
