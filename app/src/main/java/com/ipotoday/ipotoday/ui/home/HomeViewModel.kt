@@ -20,61 +20,48 @@ class HomeViewModel @Inject constructor(
 
     val test = _test
 
-    val tempList = MutableLiveData<MutableList<*>>().apply {
-        postValue(mutableListOf(
-            "Hot 종목",
-            HotIPOModel(0, listOf(IPOModel(
-                id = 0,
-                companyName = "카카오뱅크",
-                companyDescription = "은행업",
-                image = "file:///android_asset/kakaobank.jpg",
-                ipoPrice = "6500",
-                ipoAmount = "780억원"
-            ), IPOModel(
-                id = 1,
-                companyName = "카카오뱅크",
-                companyDescription = "은행업",
-                image = "file:///android_asset/kakaobank.jpg",
-                ipoPrice = "6500",
-                ipoAmount = "780억원"
-            ), IPOModel(
-                id = 2,
-                companyName = "카카오뱅크",
-                companyDescription = "은행업",
-                image = "file:///android_asset/kakaobank.jpg",
-                ipoPrice = "6500",
-                ipoAmount = "780억원"
-            ))),
-            "전체리스트",
-            IPOTotalModel(3),
-            IPOModel(
-                id = 0,
-                companyName = "카카오뱅크",
-                companyDescription = "은행업",
-                image = "file:///android_asset/kakaobank.jpg",
-                ipoPrice = "6500",
-                ipoAmount = "780억원"
-            ),
-            IPOModel(
-                id = 1,
-                companyName = "카카오뱅크",
-                companyDescription = "은행업",
-                image = "file:///android_asset/kakaobank.jpg",
-                ipoPrice = "6500",
-                ipoAmount = "780억원"
-            ),
-            IPOModel(
-                id = 2,
-                companyName = "카카오뱅크",
-                companyDescription = "은행업",
-                image = "file:///android_asset/kakaobank.jpg",
-                ipoPrice = "6500",
-                ipoAmount = "780억원"
-            )
-        ))
+    val homeItemList = mutableListOf(
+        "Hot 종목",
+        HotIPOModel(0, listOf(IPOModel(
+            id = 0,
+            companyName = "카카오뱅크",
+            companyDescription = "은행업",
+            image = "file:///android_asset/kakaobank.jpg",
+            ipoPrice = "6500",
+            ipoAmount = "780억원"
+        ), IPOModel(
+            id = 1,
+            companyName = "카카오뱅크",
+            companyDescription = "은행업",
+            image = "file:///android_asset/kakaobank.jpg",
+            ipoPrice = "6500",
+            ipoAmount = "780억원"
+        ), IPOModel(
+            id = 2,
+            companyName = "카카오뱅크",
+            companyDescription = "은행업",
+            image = "file:///android_asset/kakaobank.jpg",
+            ipoPrice = "6500",
+            ipoAmount = "780억원"
+        ))),
+        "전체리스트"
+    )
+
+    fun getData(index: Int) = homeItemList[index] as? IPOModel
+
+    fun addList(list: List<*>) {
+        homeItemList += list
     }
 
-    fun getData(index: Int) = tempList.value?.get(index) as? IPOModel
+    fun addTotal(count: Int) {
+        val totalItem = IPOTotalModel(count)
+
+        homeItemList.add(totalItem)
+    }
+
+    fun selectAllIPOModelCount(result: (Int) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
+        result.invoke(homeRepository.selectAllIPOModelCount())
+    }
 
     init {
         _test.postValue("Test Start!!!!!")

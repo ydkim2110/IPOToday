@@ -24,9 +24,7 @@ class HomeFragment : BaseFragment() {
         return FragmentHomeBinding.inflate(inflater, container, false).run {
             recyclerView.apply {
                 adapter = HomeListAdapter().apply {
-                    homeViewModel.tempList.observe(viewLifecycleOwner) { list ->
-                        submitList(list)
-                    }
+                    submitList(homeViewModel.homeItemList)
                     setOnItemClickListener { _, i ->
                         homeViewModel.getData(i)?.let { data ->
                             val direction = MainFragmentDirections.actionMainFragmentToDetailFragment(data.id!!)
