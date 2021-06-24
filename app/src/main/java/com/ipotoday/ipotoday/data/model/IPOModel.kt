@@ -8,7 +8,7 @@ import com.ipotoday.ipotoday.R
 import java.util.*
 
 @Entity(
-    tableName = "ipo_model"
+    tableName = "test_model"
 )
 data class IPOModel(
     @PrimaryKey(autoGenerate = true) var id: Int? = null,
@@ -28,8 +28,8 @@ data class IPOModel(
     @ColumnInfo(name = "demand_forecast_start_date") var demandForecastStartDate: Long? = Calendar.getInstance().time.time,
     @ColumnInfo(name = "demand_forecast_end_date") var demandForecastEndDate: Long? = Calendar.getInstance().time.time,
     @ColumnInfo(name = "apply_start_date") var applyStartDate: Long? = Calendar.getInstance().time.time,
-    @ColumnInfo(name = "apply_end_date") var applyEndDate: Long? = Calendar.getInstance().time.time,
-    @ColumnInfo(name = "refund_date") var refundDate: Long? = Calendar.getInstance().time.time,
+    @ColumnInfo(name = "apply_end_date")  var applyEndDate: Long? = Calendar.getInstance().time.time,
+    @ColumnInfo(name = "refund_date")  var refundDate: Long? = Calendar.getInstance().time.time,
     @ColumnInfo(name = "listing_date") var listingDate: Long? = Calendar.getInstance().time.time,
     @ColumnInfo(name = "competition_rate") var competitionRate: String? = "",
     @ColumnInfo(name = "institutional_competition_rate") var institutionalCompetitionRate: String? = "",

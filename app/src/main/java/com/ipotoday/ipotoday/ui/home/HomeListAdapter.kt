@@ -1,6 +1,5 @@
 package com.ipotoday.ipotoday.ui.home
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +8,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ipotoday.ipotoday.data.model.HotIPOModel
-import com.ipotoday.ipotoday.data.model.IPOModel
 import com.ipotoday.ipotoday.data.model.IPOTotalModel
+import com.ipotoday.ipotoday.data.model.IPOModel
 import com.ipotoday.ipotoday.databinding.ListItemIpoHeaderBinding
 import com.ipotoday.ipotoday.databinding.ListItemIpoHotBinding
 import com.ipotoday.ipotoday.databinding.ListItemIpoNormalBinding

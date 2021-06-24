@@ -5,9 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ipotoday.ipotoday.data.local.repository.HomeRepository
 import com.ipotoday.ipotoday.data.model.HotIPOModel
-import com.ipotoday.ipotoday.data.model.IPOModel
 import com.ipotoday.ipotoday.data.model.IPOTotalModel
-import com.ipotoday.ipotoday.data.model.TestModel
+import com.ipotoday.ipotoday.data.model.IPOModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -81,7 +80,7 @@ class HomeViewModel @Inject constructor(
         _test.postValue("Test Start!!!!!")
     }
 
-    fun insertTestViewModel(testModel: TestModel) =
+    fun insertTestViewModel(testModel: IPOModel) =
         viewModelScope.launch(Dispatchers.IO) {
             testRepository.insertTestModel(testModel)
         }
