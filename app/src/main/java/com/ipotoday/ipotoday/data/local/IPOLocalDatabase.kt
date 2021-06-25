@@ -9,10 +9,6 @@ import com.ipotoday.ipotoday.data.model.IPOModel
     version = 1,
     exportSchema = false
 )
-abstract class HomeDatabase : RoomDatabase() {
-
-    abstract val homeDao: HomeDao
-
-
-
+abstract class IPOLocalDatabase : RoomDatabase() {
+    abstract val ipoLocalDao: IPOLocalDao
 }

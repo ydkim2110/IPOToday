@@ -2,10 +2,13 @@ package com.ipotoday.ipotoday.ui.detail
 
 import android.os.Bundle
 import android.view.*
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.ipotoday.ipotoday.R
 import com.ipotoday.ipotoday.databinding.FragmentDetailBinding
@@ -48,6 +51,19 @@ class DetailFragment : BaseFragment() {
 
         binding.toolbar.title = "제주맥주"
         binding.toolbar.inflateMenu(R.menu.menu_detail)
+
+        val navController = Navigation.findNavController(requireActivity(), R.id.fragment)
+        NavigationUI.setupActionBarWithNavController(requireActivity() as AppCompatActivity, navController)
+
+//        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        binding.toolbar.setNavigationOnClickListener {
+//            findNavController().navigateUp()
+//        }
+//        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                findNavController().navigateUp()
+//            }
+//        })
         binding.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.menu_alarm -> {
