@@ -51,14 +51,18 @@ class HomeViewModel @Inject constructor(
 
     fun getData(index: Int) = homeItemList[index] as? IPOModel
 
-    fun addList(list: List<*>) {
-        homeItemList += list
+    fun addList(list: List<IPOModel>) {
+        homeItemList.addAll(list)
     }
 
     fun addTotal(count: Int) {
         val totalItem = IPOTotalModel(count)
 
-        homeItemList.add(totalItem)
+        homeItemList.add(3, totalItem)
+    }
+
+    fun clearIPOModels() {
+        homeItemList.removeAll { it is IPOModel || it is IPOTotalModel }
     }
 
     fun selectAllIPOModelCount(result: (Int) -> Unit) = viewModelScope.launch(Dispatchers.IO) {
@@ -73,5 +77,9 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             homeRepository.insertIPOModel(testModel)
         }
+
+    fun deleteAllIPOModel() = viewModelScope.launch(Dispatchers.IO) {
+        homeRepository.deleteAllIPOModel()
+    }
 
 }
