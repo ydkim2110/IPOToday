@@ -44,6 +44,16 @@
                 android:name="id"
                 app:argType="integer"
                 android:defaultValue="0" />
+        <action
+                android:id="@+id/action_detailFragment_to_selectAlarmBottomSheet"
+                app:destination="@id/selectAlarmBottomSheet" />
     </fragment>
+    <dialog
+            android:id="@+id/selectAlarmBottomSheet"
+            android:name="com.ipotoday.ipotoday.ui.detail.SelectAlarmBottomSheet"
+            android:label="SelectAlarmBottomSheet"
+            tools:layout="@layout/select_alarm_bottom_sheet">
+
+    </dialog>
 
 </navigation>

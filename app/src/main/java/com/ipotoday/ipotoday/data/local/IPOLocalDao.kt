@@ -1,5 +1,6 @@
 package com.ipotoday.ipotoday.data.local
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.ipotoday.ipotoday.data.model.IPOModel
 import kotlinx.coroutines.flow.Flow
@@ -15,6 +16,9 @@ interface IPOLocalDao {
 
     @Delete
     suspend fun deleteIPOModel(ipoModel: IPOModel)
+
+    @Query("SELECT * FROM ipo_model WHERE id LIKE :id")
+    fun getIPOModelById(id: Int): LiveData<IPOModel>
 
     @Query("SELECT * FROM ipo_model")
     fun getAllIPOModels(): Flow<List<IPOModel>>

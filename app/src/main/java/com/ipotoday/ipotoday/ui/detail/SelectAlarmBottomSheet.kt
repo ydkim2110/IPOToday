@@ -38,11 +38,11 @@ class SelectAlarmBottomSheet : BottomSheetDialogFragment() {
 
         binding.imgCloseIcon.setOnSingleClickListener { dismiss() }
         binding.layoutCustomAlarm.setOnSingleClickListener {
-            selectAlarmListener.onSelected(SelectAlarmType.CUSTOM_ALARM)
+//            selectAlarmListener.onSelected(SelectAlarmType.CUSTOM_ALARM)
             dismiss()
         }
         binding.layoutGoogleCalendar.setOnSingleClickListener {
-            selectAlarmListener.onSelected(SelectAlarmType.GOOGLE_CALENDAR)
+//            selectAlarmListener.onSelected(SelectAlarmType.GOOGLE_CALENDAR)
             dismiss()
         }
     }
