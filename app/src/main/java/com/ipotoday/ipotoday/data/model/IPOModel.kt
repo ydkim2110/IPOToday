@@ -1,12 +1,15 @@
 package com.ipotoday.ipotoday.data.model
 
+import android.os.Parcelable
 import androidx.annotation.StringRes
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.ipotoday.ipotoday.R
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
+@Parcelize
 @Entity(
     tableName = "ipo_model"
 )
@@ -35,7 +38,7 @@ data class IPOModel(
     @ColumnInfo(name = "institutional_competition_rate") var institutionalCompetitionRate: String? = "",
     @ColumnInfo(name = "lockup_rate") var lockupRate: String? = "",
     @ColumnInfo(name = "bookmark") var bookmark: Boolean? = false
-) {
+) : Parcelable {
 
     enum class MarketType(
         @StringRes resId: Int

@@ -47,13 +47,28 @@
         <action
                 android:id="@+id/action_detailFragment_to_selectAlarmBottomSheet"
                 app:destination="@id/selectAlarmBottomSheet" />
+        <action
+                android:id="@+id/action_detailFragment_to_alarmRegisterFragment"
+                app:destination="@id/alarmRegisterFragment" />
     </fragment>
     <dialog
             android:id="@+id/selectAlarmBottomSheet"
             android:name="com.ipotoday.ipotoday.ui.detail.SelectAlarmBottomSheet"
-            android:label="SelectAlarmBottomSheet"
+            android:label="select_alarm_bottom_sheet"
             tools:layout="@layout/select_alarm_bottom_sheet">
-
+        <action
+                android:id="@+id/action_selectAlarmBottomSheet_to_detailFragment"
+                app:destination="@id/detailFragment" />
+        <argument
+                android:name="alarmType"
+                app:argType="integer" />
     </dialog>
+    <fragment
+            android:id="@+id/alarmRegisterFragment"
+            android:name="com.ipotoday.ipotoday.ui.alarm.AlarmRegisterFragment"
+            android:label="fragment_alarm_register"
+            tools:layout="@layout/fragment_alarm_register">
+
+    </fragment>
 
 </navigation>

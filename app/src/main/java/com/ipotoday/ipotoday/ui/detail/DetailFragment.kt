@@ -69,7 +69,9 @@ class DetailFragment : BaseFragment() {
         val passedId = args.id
         viewModel.getIPOModelById(passedId).observe(viewLifecycleOwner) { ipoModel ->
             Timber.d("DEBUG: $ipoModel")
-            setupUI(ipoModel)
+            ipoModel?.let {
+                setupUI(ipoModel)
+            }
         }
 
 //        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -138,7 +140,19 @@ class DetailFragment : BaseFragment() {
     }
 
     private fun showAlarmBottomSheet() {
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Int>("alarmType")?.observe(viewLifecycleOwner) {
+            when (it) {
+                SelectAlarmType.GOOGLE_CALENDAR.ordinal -> {
+                    findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToAlarmRegisterFragment())
+                }
+                SelectAlarmType.CUSTOM_ALARM.ordinal -> {
+
+                }
+            }
+        }
+        Timber.d("DEBUG: testtesteest")
         findNavController().navigate(R.id.action_detailFragment_to_selectAlarmBottomSheet)
+
 /*        selectAlarmBottomSheet.isCancelable = true
         selectAlarmBottomSheet.show(childFragmentManager, SelectAlarmBottomSheet.TAG)
         selectAlarmBottomSheet.setOnSelectAlarmListener(object : SelectAlarmBottomSheet.SelectAlarmListener {

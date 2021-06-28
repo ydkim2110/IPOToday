@@ -4,8 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.ipotoday.ipotoday.R
 import com.ipotoday.ipotoday.databinding.SelectAlarmBottomSheetBinding
+import com.ipotoday.ipotoday.ui.MainFragmentDirections
 import com.ipotoday.ipotoday.utils.SelectAlarmType
 import com.ipotoday.ipotoday.utils.autoCleared
 import com.ipotoday.ipotoday.utils.extensions.setOnSingleClickListener
@@ -36,13 +44,17 @@ class SelectAlarmBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.imgCloseIcon.setOnSingleClickListener { dismiss() }
-        binding.layoutCustomAlarm.setOnSingleClickListener {
+        binding.imgCloseIcon.setOnClickListener { dismiss() }
+        binding.layoutCustomAlarm.setOnClickListener {
 //            selectAlarmListener.onSelected(SelectAlarmType.CUSTOM_ALARM)
+            findNavController().previousBackStackEntry?.savedStateHandle?.set("alarmType", SelectAlarmType.CUSTOM_ALARM.ordinal)
+            findNavController().popBackStack()
             dismiss()
         }
-        binding.layoutGoogleCalendar.setOnSingleClickListener {
+        binding.layoutGoogleCalendar.setOnClickListener {
 //            selectAlarmListener.onSelected(SelectAlarmType.GOOGLE_CALENDAR)
+            findNavController().previousBackStackEntry?.savedStateHandle?.set("alarmType", SelectAlarmType.GOOGLE_CALENDAR.ordinal)
+            findNavController().popBackStack()
             dismiss()
         }
     }
