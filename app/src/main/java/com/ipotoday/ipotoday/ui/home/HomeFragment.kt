@@ -75,28 +75,10 @@ class HomeFragment : BaseFragment() {
             addTotal(count)
         }
         ipoList.observe(viewLifecycleOwner) { ipoList ->
-            addTempIPOModel(ipoList)
             addList(ipoList)
         }
         test.observe(viewLifecycleOwner) {
             Timber.d("DEBUG : $it")
-        }
-    }
-
-    private fun addTempIPOModel(ipoList: List<IPOModel>) {
-        if (ipoList.isEmpty()) {
-            val testModel = IPOModel(
-                companyName = "카카오뱅크",
-                companyDescription = "은행업",
-                image = "file:///android_asset/kakaobank.jpg",
-                ipoPrice = "6500",
-                ipoAmount = "780억원"
-            )
-
-            // 테스트 일이삼
-            homeViewModel.insertTestViewModel(testModel)
-            homeViewModel.insertTestViewModel(testModel)
-            homeViewModel.insertTestViewModel(testModel)
         }
     }
 }
