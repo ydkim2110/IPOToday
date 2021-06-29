@@ -77,8 +77,5 @@ class HomeFragment : BaseFragment() {
         ipoList.observe(viewLifecycleOwner) { ipoList ->
             addList(ipoList)
         }
-        test.observe(viewLifecycleOwner) {
-            Timber.d("DEBUG : $it")
-        }
     }
 }
