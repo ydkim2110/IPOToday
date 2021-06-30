@@ -3,19 +3,16 @@ package com.ipotoday.ipotoday.ui.home
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.ipotoday.ipotoday.R
 import com.ipotoday.ipotoday.data.model.IPOModel
 import com.ipotoday.ipotoday.databinding.FragmentHomeBinding
 import com.ipotoday.ipotoday.ui.MainFragmentDirections
 import com.ipotoday.ipotoday.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment() {
@@ -29,12 +26,15 @@ class HomeFragment : BaseFragment() {
         return FragmentHomeBinding.inflate(inflater, container, false).run {
             recyclerView.apply {
                 adapter = HomeListAdapter().apply {
-                    submitList(homeViewModel.homeItemList)
+                    homeViewModel.homeItemList.observe(viewLifecycleOwner) { list ->
+                        submitList(list)
+                    }
                     setOnItemClickListener { _, i ->
                         homeViewModel.getData(i)?.let { data ->
-                            val direction = MainFragmentDirections.actionMainFragmentToDetailFragment(data.id!!)
+                            /*val direction = MainFragmentDirections.actionMainFragmentToDetailFragment(data.id!!)
 
-                            requireActivity().findNavController(R.id.fragment).navigate(direction)
+                            requireActivity().findNavController(R.id.fragment).navigate(direction)*/
+                            homeViewModel.addItem("테[스트")
                         }
                     }
                 }
@@ -47,11 +47,11 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         subscribeUi()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        homeViewModel.clearIPOModels()
+        requireActivity().findNavController(R.id.fragment).addOnDestinationChangedListener { _, navDestination, _ ->
+            if (navDestination.id == R.id.alarmFragment) {
+                Log.e("TEST", "테스트트트트트")
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -75,7 +75,11 @@ class HomeFragment : BaseFragment() {
             addTotal(count)
         }
         ipoList.observe(viewLifecycleOwner) { ipoList ->
+            //if (requireActivity().findNavController(R.id.fragment).currentDestination?.id == R.id.alarmFragment)
             addList(ipoList)
+        }
+        homeItemList.observe(viewLifecycleOwner) { list ->
+            Log.e("TEST", "$list")
         }
     }
 }
