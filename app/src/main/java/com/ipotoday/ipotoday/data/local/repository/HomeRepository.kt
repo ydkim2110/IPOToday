@@ -23,4 +23,13 @@ class HomeRepository @Inject constructor(
     }
 
     suspend fun deleteAllIPOModel() = homeDao.deleteAll()
+
+    companion object {
+        @Volatile private var instance: HomeRepository? = null
+
+        fun getInstance(homeDao: IPOLocalDao) =
+            instance ?: synchronized(this) {
+                instance ?: HomeRepository(homeDao).also { instance = it }
+            }
+    }
 }

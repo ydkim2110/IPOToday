@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ipotoday.ipotoday.R
 import com.ipotoday.ipotoday.databinding.FragmentMainBinding
@@ -37,7 +36,11 @@ class MainFragment : BaseFragment() {
 
             (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
             bottomNav.setupWithNavController(navController)
+            bottomNav.setOnNavigationItemSelectedListener { navItem ->
+                NavigationUI.onNavDestinationSelected(navItem, navController)
+            }
             bottomNav.setOnNavigationItemReselectedListener(fun(_: MenuItem) = Unit)
+            (requireActivity() as AppCompatActivity).setupActionBarWithNavController(navController)
         }
         return binding.root
     }
