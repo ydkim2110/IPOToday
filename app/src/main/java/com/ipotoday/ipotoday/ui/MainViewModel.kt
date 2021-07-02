@@ -64,6 +64,7 @@ class MainViewModel internal constructor(private val homeRepository: HomeReposit
 
     fun addItem(item: Any) {
         homeItemList.postValue(homeItemList.value?.apply { add(item) })
+        Log.e("TEST", "AddItem, ${homeItemList.value?.size}")
     }
 
     fun addTotal(count: Int) {
@@ -84,6 +85,12 @@ class MainViewModel internal constructor(private val homeRepository: HomeReposit
         viewModelScope.launch(Dispatchers.IO) {
             homeRepository.insertIPOModel(testModel)
         }
+
+    fun updateIPOModel(ipoModel: IPOModel) {
+        viewModelScope.launch {
+            homeRepository.updateIPOModel(ipoModel)
+        }
+    }
 
     fun deleteAllIPOModel() = viewModelScope.launch(Dispatchers.IO) {
         homeRepository.deleteAllIPOModel()

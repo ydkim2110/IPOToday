@@ -3,10 +3,10 @@ package com.ipotoday.ipotoday.ui.home
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.navGraphViewModels
 import com.ipotoday.ipotoday.R
+import com.ipotoday.ipotoday.data.model.IPOModel
 import com.ipotoday.ipotoday.databinding.FragmentHomeBinding
 import com.ipotoday.ipotoday.ui.InjectorUtils
 import com.ipotoday.ipotoday.ui.MainFragmentDirections
@@ -36,12 +36,19 @@ class HomeFragment : BaseFragment() {
                     mainViewModel.homeItemList.observe(viewLifecycleOwner) { list ->
                         submitList(list)
                     }
-                    setOnItemClickListener { _, i ->
-                        mainViewModel.getData(i)?.let { data ->
-                            /*val direction = MainFragmentDirections.actionMainFragmentToDetailFragment(data.id!!)
+                    setOnItemClickListener { v, i ->
+                        when (v.id) {
+                            R.id.cv_ipo -> mainViewModel.getData(i)?.let { data ->
+                                val direction = MainFragmentDirections.actionMainFragmentToDetailFragment(data.id!!)
 
-                            requireActivity().findNavController(R.id.fragment).navigate(direction)*/
-                            mainViewModel.addItem("테[스트")
+                                requireActivity().findNavController(R.id.fragment).navigate(direction)
+                            }
+                            R.id.iv_bookmark -> (currentList[i] as IPOModel).also { ipoModel ->
+                                ipoModel.bookmark = !ipoModel.bookmark!!
+
+                                mainViewModel.updateIPOModel(ipoModel)
+                                notifyItemChanged(i)
+                            }
                         }
                     }
                 }
@@ -59,7 +66,6 @@ class HomeFragment : BaseFragment() {
                 Log.e("TEST", "테스트트트트트")
             }
         }
-        Log.e("TEST", "${mainViewModel.test}")
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -79,9 +85,9 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun subscribeUi() = with(mainViewModel) {
-        /*selectAllIPOModelCount { count ->
+        selectAllIPOModelCount { count ->
             addTotal(count)
-        }*/
+        }
         ipoList.observe(viewLifecycleOwner) { ipoList ->
             //if (requireActivity().findNavController(R.id.fragment).currentDestination?.id == R.id.alarmFragment)
             addList(ipoList)

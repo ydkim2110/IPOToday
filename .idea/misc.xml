@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/HongHP/AndroidStudioProjects/IPOToday/app/src/main/res/drawable/ic_alarm.xml" value="0.4379487179487179" />
+        <entry key="..\:/Users/HongHP/AndroidStudioProjects/IPOToday/app/src/main/res/drawable/ic_baseline_bookmark_24.xml" value="0.2630208333333333" />
+        <entry key="..\:/Users/HongHP/AndroidStudioProjects/IPOToday/app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.2630208333333333" />
         <entry key="..\:/Users/HongHP/AndroidStudioProjects/IPOToday/app/src/main/res/drawable/ic_dot_white_selected.xml" value="0.2630208333333333" />
         <entry key="..\:/Users/HongHP/AndroidStudioProjects/IPOToday/app/src/main/res/drawable/ic_dot_white_unselected.xml" value="0.2630208333333333" />
         <entry key="..\:/Users/HongHP/AndroidStudioProjects/IPOToday/app/src/main/res/drawable/selector_tab_white.xml" value="0.2630208333333333" />
@@ -19,6 +21,7 @@
         <entry key="..\:/Users/HongHP/AndroidStudioProjects/IPOToday/app/src/main/res/layout/list_item_ipo_hot.xml" value="0.246875" />
         <entry key="..\:/Users/HongHP/AndroidStudioProjects/IPOToday/app/src/main/res/layout/list_item_ipo_normal.xml" value="0.28940217391304346" />
         <entry key="..\:/Users/HongHP/AndroidStudioProjects/IPOToday/app/src/main/res/layout/pager_item_ipo.xml" value="0.246875" />
+        <entry key="..\:/Users/HongHP/AndroidStudioProjects/IPOToday/app/src/main/res/layout/select_alarm_bottom_sheet.xml" value="0.246875" />
         <entry key="..\:/Users/HongHP/AndroidStudioProjects/IPOToday/app/src/main/res/menu/menu_main.xml" value="0.42205128205128206" />
       </map>
     </option>

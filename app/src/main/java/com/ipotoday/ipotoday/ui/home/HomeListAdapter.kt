@@ -125,12 +125,15 @@ private class IPOListDiffCallback : DiffUtil.ItemCallback<Any>() {
     }
 
     override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
+        val isSameIPOHeader = oldItem is String
+                && newItem is String
+                && oldItem == newItem
         val isSameHotIPOModel = oldItem is HotIPOModel
                 && newItem is HotIPOModel
                 && oldItem.id == newItem.id
         val isSameIPOModel = oldItem is IPOModel
                 && newItem is IPOModel
                 && oldItem.id == newItem.id
-        return isSameHotIPOModel || isSameIPOModel
+        return isSameIPOHeader || isSameHotIPOModel || isSameIPOModel
     }
 }

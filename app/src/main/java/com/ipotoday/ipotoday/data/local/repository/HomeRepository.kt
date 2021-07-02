@@ -22,6 +22,10 @@ class HomeRepository @Inject constructor(
         homeDao.insertIPOModel(ipoModel)
     }
 
+    suspend fun updateIPOModel(ipoModel: IPOModel) {
+        homeDao.updateIPOModel(ipoModel)
+    }
+
     suspend fun deleteAllIPOModel() = homeDao.deleteAll()
 
     companion object {
