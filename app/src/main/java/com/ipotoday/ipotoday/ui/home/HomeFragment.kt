@@ -86,11 +86,14 @@ class HomeFragment : BaseFragment() {
 
     private fun subscribeUi() = with(mainViewModel) {
         selectAllIPOModelCount { count ->
-            addTotal(count)
+            setTotal(count)
         }
-        ipoList.observe(viewLifecycleOwner) { ipoList ->
-            //if (requireActivity().findNavController(R.id.fragment).currentDestination?.id == R.id.alarmFragment)
-            addList(ipoList)
+        ipoList.observe(viewLifecycleOwner) { list ->
+            if (ipoListValue.isEmpty()) {
+                ipoListValue = list
+
+                addAllIPOList(ipoListValue)
+            }
         }
         /*homeItemList.observe(viewLifecycleOwner) { list ->
             Log.e("TEST", "$list")

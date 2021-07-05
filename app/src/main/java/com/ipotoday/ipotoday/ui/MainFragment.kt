@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -21,6 +22,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment : BaseFragment() {
+
     @Inject
     lateinit var sessionManager: SessionManager
 

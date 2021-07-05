@@ -11,15 +11,20 @@ import com.ipotoday.ipotoday.data.local.repository.HomeRepository
 import com.ipotoday.ipotoday.data.model.HotIPOModel
 import com.ipotoday.ipotoday.data.model.IPOModel
 import com.ipotoday.ipotoday.data.model.IPOTotalModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel internal constructor(private val homeRepository: HomeRepository) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject internal constructor(private val homeRepository: HomeRepository) : ViewModel() {
     val test = "test"
 
     val ipoList = homeRepository.selectAllIPOModels()
 
-    val mainItemList = mutableListOf(
+    var ipoListValue = emptyList<IPOModel>()
+
+    private val mainItemList = mutableListOf(
         "Hot 종목",
         HotIPOModel(0, listOf(
             IPOModel(
@@ -45,7 +50,8 @@ class MainViewModel internal constructor(private val homeRepository: HomeReposit
             ipoAmount = "780억원"
         )
         )),
-        "전체리스트"
+        "전체리스트",
+        ""
     )
 
     val homeItemList = MutableLiveData<MutableList<Any>>()
@@ -57,20 +63,14 @@ class MainViewModel internal constructor(private val homeRepository: HomeReposit
 
     fun getData(index: Int) = mainItemList[index] as? IPOModel
 
-    fun addList(list: List<IPOModel>) {
-        homeItemList.postValue(homeItemList.value?.apply { addAll(list) })
+    fun addAllIPOList(list: List<IPOModel>) {
         mainItemList.addAll(list)
+        homeItemList.postValue(mainItemList)
     }
 
-    fun addItem(item: Any) {
-        homeItemList.postValue(homeItemList.value?.apply { add(item) })
-        Log.e("TEST", "AddItem, ${homeItemList.value?.size}")
-    }
-
-    fun addTotal(count: Int) {
+    fun setTotal(count: Int) {
         val totalItem = IPOTotalModel(count)
-
-        mainItemList.add(3, totalItem)
+        mainItemList[3] = totalItem
     }
 
     fun clearIPOModels() {
@@ -94,39 +94,6 @@ class MainViewModel internal constructor(private val homeRepository: HomeReposit
 
     fun deleteAllIPOModel() = viewModelScope.launch(Dispatchers.IO) {
         homeRepository.deleteAllIPOModel()
-    }
-
-    init {
-        homeItemList.postValue(
-            mutableListOf(
-                "Hot 종목",
-                HotIPOModel(0, listOf(
-                    IPOModel(
-                    id = 0,
-                    companyName = "카카오뱅크",
-                    companyDescription = "은행업",
-                    image = "file:///android_asset/kakaobank.jpg",
-                    ipoPrice = "6500",
-                    ipoAmount = "780억원"
-                ), IPOModel(
-                    id = 1,
-                    companyName = "카카오뱅크",
-                    companyDescription = "은행업",
-                    image = "file:///android_asset/kakaobank.jpg",
-                    ipoPrice = "6500",
-                    ipoAmount = "780억원"
-                ), IPOModel(
-                    id = 2,
-                    companyName = "카카오뱅크",
-                    companyDescription = "은행업",
-                    image = "file:///android_asset/kakaobank.jpg",
-                    ipoPrice = "6500",
-                    ipoAmount = "780억원"
-                )
-                )),
-                "전체리스트"
-            )
-        )
     }
 }
 
