@@ -3,6 +3,7 @@ package com.ipotoday.ipotoday.ui.home
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.navigation.navGraphViewModels
 import com.ipotoday.ipotoday.R
@@ -12,6 +13,8 @@ import com.ipotoday.ipotoday.ui.InjectorUtils
 import com.ipotoday.ipotoday.ui.MainFragmentDirections
 import com.ipotoday.ipotoday.ui.MainViewModel
 import com.ipotoday.ipotoday.ui.base.BaseFragment
+import com.ipotoday.ipotoday.utils.Status
+import com.ipotoday.ipotoday.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,12 +28,14 @@ class HomeFragment : BaseFragment() {
         InjectorUtils.provideMainViewModelFactory(requireContext())
     } //hiltViewModel 로 navGraphViewModels함수로 생성하면 constuctor가 작동안됨 (힐트로 주입하는방법 찾아보기)
 
+    private var binding: FragmentHomeBinding by autoCleared()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return FragmentHomeBinding.inflate(inflater, container, false).run {
+        binding = FragmentHomeBinding.inflate(inflater, container, false).apply {
             recyclerView.apply {
                 adapter = HomeListAdapter().apply {
                     mainViewModel.homeItemList.observe(viewLifecycleOwner) { list ->
@@ -53,8 +58,8 @@ class HomeFragment : BaseFragment() {
                     }
                 }
             }
-            root
         }
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -88,11 +93,22 @@ class HomeFragment : BaseFragment() {
         selectAllIPOModelCount { count ->
             setTotal(count)
         }
-        ipoList.observe(viewLifecycleOwner) { list ->
-            if (ipoListValue.isEmpty()) {
-                ipoListValue = list
+        ipoList.observe(viewLifecycleOwner) { res ->
+            binding.status = res.status
 
-                addAllIPOList(ipoListValue)
+            when (res.status) {
+                Status.SUCCESS -> {
+                    if (ipoListValue.isEmpty()) {
+                        res.data?.observe(viewLifecycleOwner) { list ->
+                            ipoListValue = list
+
+                            addAllIPOList(ipoListValue)
+                        }
+                    }
+                }
+                Status.ERROR -> {
+                    Toast.makeText(requireContext(), "에러", Toast.LENGTH_LONG).show()
+                }
             }
         }
         /*homeItemList.observe(viewLifecycleOwner) { list ->

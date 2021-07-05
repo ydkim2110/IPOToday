@@ -2,15 +2,13 @@ package com.ipotoday.ipotoday.ui
 
 import android.content.Context
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.ipotoday.ipotoday.data.local.IPOLocalDatabase
 import com.ipotoday.ipotoday.data.local.repository.HomeRepository
 import com.ipotoday.ipotoday.data.model.HotIPOModel
 import com.ipotoday.ipotoday.data.model.IPOModel
 import com.ipotoday.ipotoday.data.model.IPOTotalModel
+import com.ipotoday.ipotoday.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,7 +18,14 @@ import javax.inject.Inject
 class MainViewModel @Inject internal constructor(private val homeRepository: HomeRepository) : ViewModel() {
     val test = "test"
 
-    val ipoList = homeRepository.selectAllIPOModels()
+    val ipoList = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = homeRepository.selectAllIPOModels()))
+        } catch (e: Exception) {
+            emit(Resource.error(data = null, message = e.message ?: "Error Occured"))
+        }
+    }
 
     var ipoListValue = emptyList<IPOModel>()
 
